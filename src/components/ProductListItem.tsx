@@ -15,7 +15,8 @@ const ProductListItem = ({ product }: ProductListItemProps) => {
       <Image
         source={{ uri: product.image || defaultPizzaImage }}
         style={styles.image}
-      />
+        resizeMode="contain"
+        />
       <Text style={styles.title}>{product.name} </Text>
       <Text style={styles.price}>Rs {product.price}</Text>
     </View>
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     flex:1,
+    maxWidth:"50%",
   },
   title: {
     fontSize: 20,
