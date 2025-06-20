@@ -1,14 +1,22 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import products from "@/assets/data/products";
 import { defaultPizzaImage } from "@/src/components/ProductListItem";
+import { useState } from "react";
+import Button from "@/src/components/Button";
 
 const sizes = ["S", "M", "L", "XL"];
 const ProductDetailScreen = () => {
   const { id } = useLocalSearchParams();
+  const [selectedSize, setSelectedSize] = useState("M");
 
   const product = products.find((p) => p?.id.toString() === id);
+
+  const addToCart = () => {
+    console.warn("Adding to cart, size", selectedSize);
+  };
+
   if (!product) {
     return <Text>Product Not Found !!!</Text>;
   }
@@ -23,15 +31,33 @@ const ProductDetailScreen = () => {
       <Text>Select Size:</Text>
       <View style={styles.sizes}>
         {sizes.map((size) => (
-          <View key={size} style={styles.size}>
-            <Text style={styles.sizeText} key={size}>
+          <Pressable
+            onPress={() => {
+              setSelectedSize(size);
+            }}
+            key={size}
+            style={[
+              styles.size,
+              {
+                backgroundColor: selectedSize === size ? "gainsboro" : "white",
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.sizeText,
+                { color: selectedSize === size ? "black" : "gray" },
+              ]}
+              key={size}
+            >
               {size}
             </Text>
-          </View>
+          </Pressable>
         ))}
       </View>
 
       <Text style={styles.price}>Rs {product?.price} </Text>
+      <Button onPress={addToCart} text="Add to Cart" />
     </View>
   );
 };
@@ -52,24 +78,23 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 18,
     fontWeight: "bold",
+    marginTop:'auto',
   },
   sizes: {
-    flexDirection:'row',
-    justifyContent:"space-around",
-
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   size: {
-    backgroundColor:"gainsboro",
-    width:50,
-    aspectRatio:1,
-    borderRadius:25,
-    alignItems:"center",
-    justifyContent:"center",
-    marginVertical:10,
+    backgroundColor: "gainsboro",
+    width: 50,
+    aspectRatio: 1,
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 10,
   },
   sizeText: {
-    fontSize:20,
-    fontWeight:'500',
-
+    fontSize: 20,
+    fontWeight: "500",
   },
 });
