@@ -1,7 +1,7 @@
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View } from "react-native";
 
-import React from 'react'
-import { StatusBar } from 'expo-status-bar'
+import React from "react";
+import { StatusBar } from "expo-status-bar";
 
 const CartScreen = () => {
   return (
@@ -9,9 +9,9 @@ const CartScreen = () => {
       <Text>CartScreen</Text>
       <StatusBar style={Platform.OS === "android" ? "light" : "auto"} />
     </View>
-  )
-}
+  );
+};
 
-export default CartScreen
+export default CartScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
