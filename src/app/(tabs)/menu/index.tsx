@@ -6,7 +6,7 @@ import { View, FlatList, StyleSheet } from "react-native";
 export default function MenuScreen() {
   return (
     <View style={{flex: 1}} >
-      <Stack.Screen options={{headerShown:false}} />
+      <Stack.Screen options={{headerShown:true}} />
     <FlatList
       data={products}
       renderItem={({ item }) => <ProductListItem product={item} />}
